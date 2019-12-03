@@ -1,0 +1,105 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+
+class MobileProcessors
+{
+public:
+     //деструктор
+    ~MobileProcessors()
+    {
+        cout<< "Memory cleaned" <<endl;
+    }
+    
+    //конструктор копирования
+    MobileProcessors(MobileProcessors &obj)
+    {
+        this->name = obj.name;
+        this->GPU = obj.GPU;
+        this->techprocess = obj.techprocess;
+        this->core = obj.core;
+    }
+    
+    //пустой конструктор
+    MobileProcessors(){}
+    
+    //просто конструктор
+    MobileProcessors(string name, string GPU, int techprocess, int core)
+    {
+       this->name = name;
+       this->GPU = GPU;
+       this->techprocess = techprocess;
+       this->core = core;
+    }
+    //конструктор записи одного поля
+    MobileProcessors(int core): core(core) {}
+    
+    //запись названия процессора
+    void set_name(string processor_name)
+        {
+            name = processor_name;
+        }
+    //получение названия процессора
+          string get_name()
+        {
+            return name;
+        }
+    //запись названия GPU
+          void set_GPU_name(string GPU_name)
+        {
+            GPU = GPU_name;
+        }
+    //получение названия GPU
+          string get_GPU_name()
+        {
+            return GPU;
+        }
+    //запись техпроцесса
+          void set_techprocess(int techprocess_num)
+        {
+            techprocess = techprocess_num;
+        }
+    //получение года выпуска
+          int get_techprocess()
+        {
+            return techprocess;
+        }
+    //запись количества ядер
+        void set_core(int core_num)
+        {
+            core = core_num;
+        }
+    //получение количества ядер
+       int get_core()
+        {
+            return core;
+        }
+private:
+    string name;
+    string GPU;
+    short int techprocess;
+    short int core;
+    
+};
+
+
+
+int main()
+{
+    string name, GPU; short int techprocess, core;
+    cin >> name >> GPU >> techprocess >> core;
+    
+    MobileProcessors *MobileProcessor = new MobileProcessors(name, GPU, techprocess, core);
+    
+    MobileProcessors MobProc(8);
+    
+    MobileProcessors Mobile(*MobileProcessor);
+    
+    cout << Mobile.get_name() << endl << Mobile.get_GPU_name() << endl <<Mobile.get_techprocess() << endl <<Mobile.get_core();
+    
+    delete MobileProcessor;
+    return 0;
+}
